@@ -13,3 +13,4 @@ Este es un juego web interactivo basado en el clásico juego de **Simon Says**, 
 ## Tecnologías Utilizadas
 - **HTML**: Estructura básica de la página web y los elementos interactivos (botones, puntajes, menú).
 - **CSS**: Estilización de la interfaz, efectos visuales en los botones y diseño responsivo.
+- **JavaScript**: Lógica del juego, manejo de eventos, secuencias de colores y sonidos, almacenamiento de puntuaciones en `localStorage`.
