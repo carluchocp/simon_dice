@@ -14,3 +14,13 @@ Este es un juego web interactivo basado en el clásico juego de **Simon Says**, 
 - **HTML**: Estructura básica de la página web y los elementos interactivos (botones, puntajes, menú).
 - **CSS**: Estilización de la interfaz, efectos visuales en los botones y diseño responsivo.
 - **JavaScript**: Lógica del juego, manejo de eventos, secuencias de colores y sonidos, almacenamiento de puntuaciones en `localStorage`.
+
+## Cómo jugar
+
+1. Haz clic en el botón **"Start"** para comenzar el juego.
+2. Los botones de colores comenzarán a resaltar en un orden específico. Memorizalo.
+3. Haz clic en los botones en el mismo orden en que se muestran.
+4. Cada vez que aciertes la secuencia, la ronda aumentará y los botones se mostrarán más rápido.
+5. El juego terminará si fallas al repetir la secuencia correctamente.
+
+## Instalación
