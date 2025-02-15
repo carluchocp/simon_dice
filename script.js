@@ -21,12 +21,18 @@ class Simon {
         this.display = {
             startButton
         };
-        this.errorSound = new Audio('sonidos/error.mp3'); // Sonido de error
+
+        // Contador de victorias
+        this.winCount = localStorage.getItem('winCount') ? parseInt(localStorage.getItem('winCount')) : 0;
+        this.winCountDisplay = document.getElementById('winCount');
+        this.updateWinCount();
+
+        this.errorSound = new Audio('sounds/error.mp3'); // Sonido de error
         this.buttonSounds = [
-            new Audio('sonidos/verde.mp3'), // Sonido del botón verde
-            new Audio('sonidos/rojo.mp3'),  // Sonido del botón rojo
-            new Audio('sonidos/amarillo.mp3'), // Sonido del botón amarillo
-            new Audio('sonidos/azul.mp3'),  // Sonido del botón azul
+            new Audio('sounds/verde.mp3'), // Sonido del botón verde
+            new Audio('sounds/rojo.mp3'),  // Sonido del botón rojo
+            new Audio('sounds/amarillo.mp3'), // Sonido del botón amarillo
+            new Audio('sounds/azul.mp3'),  // Sonido del botón azul
         ];
         this.message = document.createElement('div'); // Crear el mensaje de "You lost" o "You win!"
         this.message.className = 'message';
@@ -36,6 +42,13 @@ class Simon {
     // Inicia el juego
     init() {
         this.display.startButton.onclick = () => this.startGame();
+        document.getElementById('playButton').onclick = () => this.showGame();
+        document.getElementById('menuButton').onclick = () => this.showMenu();
+    }
+
+    showGame() {
+        document.getElementById('menu').classList.add('hidden');
+        document.querySelector('.desktop').classList.remove('hidden');
     }
 
     // Comienza el juego
@@ -127,23 +140,40 @@ class Simon {
     gameLost() {
         this.errorSound.play(); // Reproduce el sonido de error
         this.blockedButtons = true; // Bloquea los botones
-        this.showMessage('You lost!'); // Muestra el mensaje de "You lost"
+        this.showMessage('You lost! <br> <button id="restartGame">Reiniciar</button>'); // Muestra el mensaje de "You lost"
+        setTimeout(() => {
+            document.getElementById('restartGame').onclick = () => this.resetGame();
+        }, 100); 
     }
 
     // Juego ganado
     gameWon() {
+        this.winCount++;
+        localStorage.setItem('winCount', this.winCount);
+        this.updateWinCount();
         this.blockedButtons = true; // Bloquea los botones
         this.showMessage('🏆 You win! 🏆'); // Muestra el mensaje de "You win!"
     }
 
+    updateWinCount() {
+        this.winCountDisplay.textContent = this.winCount;
+    }
+
     // Muestra un mensaje emergente
     showMessage(text) {
-        this.message.textContent = text; // Establece el texto del mensaje
+        this.message.innerHTML = text; // Establece el texto del mensaje
         this.message.style.display = 'block'; // Muestra el mensaje
         setTimeout(() => {
             this.message.style.display = 'none'; // Oculta el mensaje después de 2 segundos
             this.resetGame(); // Reinicia el juego
         }, 2000);
+
+        document.getElementById('backToMenu').onclick = () => this.showMenu();
+    }
+
+    showMenu() {
+        document.getElementById('menu').classList.remove('hidden');
+        document.querySelector('.desktop').classList.add('hidden');
     }
 
     // Reinicia el juego
@@ -154,6 +184,8 @@ class Simon {
         this.userPosition = 0;
         this.sequence = [];
         this.speed = 1000;
+        this.blockedButtons = true;
+        this.message.style.display = 'none'; // Oculta cualquier mensaje activo
     }
 }
 
