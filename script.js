@@ -13,7 +13,7 @@ class Simon {
     constructor(buttons, startButton) {
         this.round = 0;
         this.userPosition = 0;
-        this.totalRounds = 10;
+        this.totalRounds = 20;
         this.sequence = [];
         this.speed = 1000; // Tiempo entre los botones de la secuencia
         this.blockedButtons = true; // Bloquea los botones hasta que el jugador pueda interactuar
@@ -28,9 +28,8 @@ class Simon {
             new Audio('sonidos/amarillo.mp3'), // Sonido del botón amarillo
             new Audio('sonidos/azul.mp3'),  // Sonido del botón azul
         ];
-        this.message = document.createElement('div'); // Crear el mensaje de "You lost"
+        this.message = document.createElement('div'); // Crear el mensaje de "You lost" o "You win!"
         this.message.className = 'message';
-        this.message.textContent = 'You lost!';
         document.body.appendChild(this.message);
     }
 
@@ -128,7 +127,19 @@ class Simon {
     gameLost() {
         this.errorSound.play(); // Reproduce el sonido de error
         this.blockedButtons = true; // Bloquea los botones
-        this.message.style.display = 'block'; // Muestra el mensaje de "You lost"
+        this.showMessage('You lost!'); // Muestra el mensaje de "You lost"
+    }
+
+    // Juego ganado
+    gameWon() {
+        this.blockedButtons = true; // Bloquea los botones
+        this.showMessage('🏆 You win! 🏆'); // Muestra el mensaje de "You win!"
+    }
+
+    // Muestra un mensaje emergente
+    showMessage(text) {
+        this.message.textContent = text; // Establece el texto del mensaje
+        this.message.style.display = 'block'; // Muestra el mensaje
         setTimeout(() => {
             this.message.style.display = 'none'; // Oculta el mensaje después de 2 segundos
             this.resetGame(); // Reinicia el juego
@@ -143,13 +154,6 @@ class Simon {
         this.userPosition = 0;
         this.sequence = [];
         this.speed = 1000;
-    }
-
-    // Juego ganado
-    gameWon() {
-        this.display.startButton.disabled = false; 
-        this.blockedButtons = true;
-        this.display.startButton.textContent = '🏆 You Win! 🏆'; // Mensaje de victoria
     }
 }
 
