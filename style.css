@@ -261,7 +261,7 @@ body {
 /* Estilos responsivos */
 @media (max-width: 600px) {
     .header {
-        font-size: 3vw; 
+        font-size: 2vw; 
         height: auto;
         padding: 10px 0;
     }
@@ -272,8 +272,8 @@ body {
     }
 
     .simon-bg {
-        width: 90vw; 
-        height: 90vw;
+        width: 92vw; 
+        height: 92vw;
     }
 
     .botones-sup, .botones-inf {
