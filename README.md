@@ -22,7 +22,7 @@ Este es un juego web interactivo basado en el clásico juego de **Simon Says**, 
 2. Los botones de colores comenzarán a resaltar en un orden específico. Memorizalo.
 3. Haz clic en los botones en el mismo orden en que se muestran.
 4. Cada vez que aciertes la secuencia, la ronda aumentará y los botones se mostrarán más rápido.
-5. **Si te equivocas, aparecerá un mensaje de "You Lost!" con la opción de reiniciar y volver al menú principal.**  
+5. **Si te equivocas, aparecerá un mensaje de "You Lost!" con la opción de reiniciar.**  
 
 ## Funcionalidad de Reinicio
 Si el jugador comete un error, aparecerá un mensaje **"You Lost!"** con un botón para **volver al menú principal** y **reiniciar el juego**.  
