@@ -9,7 +9,18 @@
     <body>
         <!-- Menú Principal -->
         <div id="menu" class="menu">
-            <h1>Simon Says Game</h1>
+            <h1>
+                <span class="s">S</span>
+                <span class="i">I</span>
+                <span class="m">M</span>
+                <span class="o">O</span>
+                <span class="n">N</span>
+                <span class="space"></span> <!-- Espacio entre la N y la S -->
+                <span class="s">S</span>
+                <span class="a">A</span>
+                <span class="y">Y</span>
+                <span class="s">S</span>
+            </h1>
             <form id="userForm">
                 <input type="text" id="username" placeholder="Enter your username" required>
                 <button type="submit">Save</button>
@@ -17,15 +28,15 @@
             <p>Welcome, <span id="currentUser">Guest</span>!</p>
             <p>Total Wins: <span id="winCount">0</span></p>
             <button id="playButton" class="boton-start">Play</button>
-            <button id="viewScoresButton">View My Scores</button>
-            <button id="viewAllUsersButton">View All Users</button>
+            <button id="viewScores" class="button">View My Scores</button>
+            <button id="viewUsers" class="button">View All Users</button>
             <button id="resetDataButton">Reset Data</button> <!-- Botón para reiniciar el localStorage -->
             <div id="scoresDisplay"></div>
         </div>
 
         <!-- Juego -->
         <div class="header">
-            <h1>Start playing simon says!</h1>
+            <h1>Start playing Simon Says!</h1>
         </div>
         <div class="desktop hidden">
             <button id="menuButton" class="boton-start">Main Menu</button>

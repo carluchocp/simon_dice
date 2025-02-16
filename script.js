@@ -50,8 +50,8 @@ class Simon {
         document.getElementById('playButton').onclick = () => this.showGame();
         document.getElementById('menuButton').onclick = () => this.showMenu();
         document.getElementById('userForm').onsubmit = (e) => this.saveUsername(e);
-        document.getElementById('viewScoresButton').onclick = () => this.viewUserScores();
-        document.getElementById('viewAllUsersButton').onclick = () => this.viewAllUsers();
+        document.getElementById('viewScores').onclick = () => this.viewUserScores();
+        document.getElementById('viewUsers').onclick = () => this.viewAllUsers();
         document.getElementById('resetDataButton').onclick = () => this.resetLocalStorage(); // Botón para reiniciar el localStorage
     }
 
