@@ -256,3 +256,39 @@ body {
 #viewUsers:active {
     background-color: #ffccbc;
 }
+
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
+    .header {
+        font-size: 5vw; 
+        height: auto;
+        padding: 10px 0;
+
+    .desktop {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .simon-bg {
+        width: 90vw; 
+        height: 90vw;
+    }
+
+    .botones-sup, .botones-inf {
+        width: 90vw; 
+    }
+
+    .boton-verde, .boton-rojo, .boton-amarillo, .boton-azul {
+        width: 40vw; 
+        height: 40vw;
+    }
+
+    .boton-start {
+        font-size: 3vw;
+        padding: 8px 16px;
+    }
+
+    .menu {
+        font-size: 5vw; 
+}
