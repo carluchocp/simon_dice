@@ -1,0 +1,259 @@
+/* Fuente global */
+body {
+    font-family: "Poppins", sans-serif; /* Fuente moderna y uniforme */
+}
+
+/* Estilos generales para los botones */
+.button {
+    color: white;
+    background-color: #2196F3; /* Azul moderno */
+    font-size: 18px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(33, 150, 243, 0.5);
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    margin: 10px;
+    display: inline-block;
+    text-align: center;
+}
+
+/* Efecto hover */
+.button:hover {
+    background-color: #64B5F6;
+    box-shadow: 0px 5px 15px rgba(33, 150, 243, 0.8);
+}
+
+/* Efecto al hacer clic */
+.button:active {
+    background-color: #BBDEFB;
+    box-shadow: 0px 0px 15px rgba(33, 150, 243, 1);
+    transform: scale(0.95);
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: orange;
+    height: 10vh;
+    font-size: 2vw;
+}
+.desktop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 90vh;
+}
+.simon-bg {
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    border-radius: 100%;
+    height: 78vh;
+    width: 46vw;
+    align-items: center;
+    justify-content: center;
+}
+.simon-text {
+    color: white;
+}
+.boton-verde {
+    background-color: green;
+    height: 29vh;
+    width: 18vw;
+    border-radius: 29vh 0 0 0;
+}
+.boton-rojo {
+    background-color: red;
+    height: 29vh;
+    width: 18vw;
+    border-radius: 0 29vh 0 0;
+}
+.boton-amarillo {
+    background-color: yellow;
+    height: 29vh;
+    width: 18vw;
+    border-radius: 0 0 0 29vh;
+}
+.boton-azul {
+    background-color: blue;
+    height: 29vh;
+    width: 18vw;
+    border-radius: 0 0 29vh 0;
+}
+.boton-verde.active {
+    background-color: lime;
+}
+.boton-rojo.active {
+    background-color: #ff6666;
+}
+.boton-amarillo.active {
+    background-color: #ffff66;
+}
+.boton-azul.active {
+    background-color: #6666ff;
+}
+.botones-sup {
+    display: flex;
+    width: 39vw;
+    justify-content: space-between;
+}
+.botones-inf {
+    display: flex;
+    width: 39vw;
+    justify-content: space-between;
+}
+.boton-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+}
+
+.boton-start {
+    color: white;
+    background-color: #ff9800;
+    font-size: 4vh;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 4px 10px rgba(255, 152, 0, 0.5);
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.boton-start:hover {
+    background-color: #ffb74d;
+    box-shadow: 0px 5px 15px rgba(255, 152, 0, 0.8);
+}
+
+.boton-start:active {
+    background-color: #ffcc80;
+    box-shadow: 0px 0px 20px rgba(255, 152, 0, 1);
+    transform: scale(0.95);
+}
+
+.message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 24px;
+    z-index: 1000;
+    display: none; /* Oculto por defecto */
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    font-weight: bold;  
+    font-size: 2.5vw;
+}
+
+.s {
+    color: green;
+}
+
+.i {
+    color: red;
+}
+
+.m {
+    color: yellow;
+}
+
+.o {
+    color: blue;
+}
+
+.space {
+    display: inline-block;
+    width: 0.5em; 
+}
+
+.n {
+    color: green;
+}
+
+.a {
+    color: red;
+}
+
+.y {
+    color: blue;
+}
+
+.hidden {
+    display: none;
+}
+
+#menuButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #ff9800;
+    color: white;
+    font-size: 18px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: 0px 3px 8px rgba(255, 152, 0, 0.5);
+    border: none;
+    font-weight: bold;
+}
+
+#menuButton:hover {
+    background-color: #ffb74d;
+    box-shadow: 0px 5px 10px rgba(255, 152, 0, 0.8);
+}
+
+#menuButton:active {
+    background-color: #ffcc80;
+    box-shadow: 0px 0px 15px rgba(255, 152, 0, 1);
+    transform: scale(0.95);
+}
+
+
+#viewScores {
+    background-color: #4CAF50; /* Verde */
+    box-shadow: 0px 4px 10px rgba(76, 175, 80, 0.5);
+}
+
+#viewScores:hover {
+    background-color: #66bb6a;
+}
+
+#viewScores:active {
+    background-color: #c8e6c9;
+}
+
+#viewUsers {
+    background-color: #FF5722; /* Naranja fuerte */
+    box-shadow: 0px 4px 10px rgba(255, 87, 34, 0.5);
+}
+
+#viewUsers:hover {
+    background-color: #ff7043;
+}
+
+#viewUsers:active {
+    background-color: #ffccbc;
+}
