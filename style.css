@@ -261,7 +261,7 @@ body {
 /* Estilos responsivos */
 @media (max-width: 600px) {
     .header {
-        font-size: 5vw; 
+        font-size: 3vw; 
         height: auto;
         padding: 10px 0;
     }
