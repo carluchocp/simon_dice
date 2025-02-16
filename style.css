@@ -264,6 +264,7 @@ body {
         font-size: 5vw; 
         height: auto;
         padding: 10px 0;
+    }
 
     .desktop {
         flex-direction: column;
