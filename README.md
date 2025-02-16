@@ -26,4 +26,5 @@ Este es un juego web interactivo basado en el clásico juego de **Simon Says**, 
 
 ## Funcionalidad de Reinicio
 Si el jugador comete un error, aparecerá un mensaje **"You Lost!"** con un botón para **reiniciar el juego**.  
-En el menú principal se muestra el número total de victorias guardadas con `localStorage`.
+
+* En el menú principal se muestra el número total de victorias guardadas con `localStorage`.
