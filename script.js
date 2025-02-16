@@ -22,8 +22,13 @@ class Simon {
             startButton
         };
 
+        // Usuario actual y puntajes
+        this.currentUser = localStorage.getItem('currentUser') || 'Guest';
+        this.updateCurrentUserDisplay();
+        this.scores = JSON.parse(localStorage.getItem('scores')) || {};
+
         // Contador de victorias
-        this.winCount = localStorage.getItem('winCount') ? parseInt(localStorage.getItem('winCount')) : 0;
+        this.winCount = this.scores[this.currentUser]?.wins || 0;
         this.winCountDisplay = document.getElementById('winCount');
         this.updateWinCount();
 
@@ -44,8 +49,38 @@ class Simon {
         this.display.startButton.onclick = () => this.startGame();
         document.getElementById('playButton').onclick = () => this.showGame();
         document.getElementById('menuButton').onclick = () => this.showMenu();
+        document.getElementById('userForm').onsubmit = (e) => this.saveUsername(e);
+        document.getElementById('viewScoresButton').onclick = () => this.viewUserScores();
+        document.getElementById('viewAllUsersButton').onclick = () => this.viewAllUsers();
+        document.getElementById('resetDataButton').onclick = () => this.resetLocalStorage(); // Botón para reiniciar el localStorage
     }
 
+    // Guarda el nombre de usuario
+    saveUsername(e) {
+        e.preventDefault();
+        const username = document.getElementById('username').value;
+        if (username) {
+            this.currentUser = username;
+            localStorage.setItem('currentUser', username);
+            this.updateCurrentUserDisplay();
+
+            // Inicializa el puntaje si el usuario no existe
+            if (!this.scores[username]) {
+                this.scores[username] = { wins: 0, totalScore: 0, games: [] };
+                localStorage.setItem('scores', JSON.stringify(this.scores));
+            }
+
+            this.winCount = this.scores[username].wins;
+            this.updateWinCount();
+        }
+    }
+
+    // Actualiza la visualización del usuario actual
+    updateCurrentUserDisplay() {
+        document.getElementById('currentUser').textContent = this.currentUser;
+    }
+
+    // Muestra el juego
     showGame() {
         document.getElementById('menu').classList.add('hidden');
         document.querySelector('.desktop').classList.remove('hidden');
@@ -138,23 +173,39 @@ class Simon {
 
     // Juego perdido
     gameLost() {
+        const score = this.round * 10; // Cada ronda vale 10 puntos
+        this.scores[this.currentUser].games.push({ score, won: false });
+        this.scores[this.currentUser].totalScore += score; // Suma el puntaje al total
+        localStorage.setItem('scores', JSON.stringify(this.scores));
+
         this.errorSound.play(); // Reproduce el sonido de error
         this.blockedButtons = true; // Bloquea los botones
-        this.showMessage('You lost! <br> <button id="restartGame">Reiniciar</button>'); // Muestra el mensaje de "You lost"
+
+        // Muestra el mensaje de "You lost"
+        this.showMessage(`You lost! <br> Score: ${score} <br> <button id="restartGame">Reiniciar</button>`);
+
+        // Reinicia el juego después de 2 segundos
         setTimeout(() => {
-            document.getElementById('restartGame').onclick = () => this.resetGame();
-        }, 100); 
+            this.resetGame();
+        }, 2000);
     }
 
     // Juego ganado
     gameWon() {
-        this.winCount++;
-        localStorage.setItem('winCount', this.winCount);
+        const score = this.round * 10; // Cada ronda vale 10 puntos
+        this.scores[this.currentUser].wins++;
+        this.scores[this.currentUser].totalScore += score; // Suma el puntaje al total
+        this.scores[this.currentUser].games.push({ score, won: true });
+        localStorage.setItem('scores', JSON.stringify(this.scores));
+
+        this.winCount = this.scores[this.currentUser].wins;
         this.updateWinCount();
+
         this.blockedButtons = true; // Bloquea los botones
-        this.showMessage('🏆 You win! 🏆'); // Muestra el mensaje de "You win!"
+        this.showMessage(`🏆 You win! 🏆 <br> Score: ${score}`); // Muestra el mensaje de "You win!"
     }
 
+    // Actualiza el contador de victorias
     updateWinCount() {
         this.winCountDisplay.textContent = this.winCount;
     }
@@ -163,14 +214,20 @@ class Simon {
     showMessage(text) {
         this.message.innerHTML = text; // Establece el texto del mensaje
         this.message.style.display = 'block'; // Muestra el mensaje
-        setTimeout(() => {
-            this.message.style.display = 'none'; // Oculta el mensaje después de 2 segundos
-            this.resetGame(); // Reinicia el juego
-        }, 2000);
 
-        document.getElementById('backToMenu').onclick = () => this.showMenu();
+        // Configura el botón de reinicio
+        setTimeout(() => {
+            const restartButton = document.getElementById('restartGame');
+            if (restartButton) {
+                restartButton.onclick = () => {
+                    this.resetGame();
+                    this.message.style.display = 'none'; // Oculta el mensaje
+                };
+            }
+        }, 100);
     }
 
+    // Muestra el menú
     showMenu() {
         document.getElementById('menu').classList.remove('hidden');
         document.querySelector('.desktop').classList.add('hidden');
@@ -186,6 +243,52 @@ class Simon {
         this.speed = 1000;
         this.blockedButtons = true;
         this.message.style.display = 'none'; // Oculta cualquier mensaje activo
+    }
+
+    // Muestra los puntajes del usuario actual
+    viewUserScores() {
+        const userScores = this.scores[this.currentUser];
+        const scoresDisplay = document.getElementById('scoresDisplay');
+        if (userScores) {
+            const gamesList = userScores.games.map((game, index) => `
+                <p>Game ${index + 1}: ${game.score} points (${game.won ? 'Won' : 'Lost'})</p>
+            `).join('');
+            scoresDisplay.innerHTML = `
+                <h3>Your Scores</h3>
+                <p>Total Wins: ${userScores.wins}</p>
+                <p>Total Points: ${userScores.totalScore}</p>
+                ${gamesList}
+            `;
+        } else {
+            scoresDisplay.innerHTML = `<p>No scores available for ${this.currentUser}.</p>`;
+        }
+    }
+
+    // Muestra todos los usuarios y sus puntajes totales
+    viewAllUsers() {
+        const scoresDisplay = document.getElementById('scoresDisplay');
+        const users = Object.entries(this.scores)
+            .sort((a, b) => b[1].totalScore - a[1].totalScore) // Ordena de mayor a menor
+            .map(([user, data]) => `
+                <p>${user}: ${data.totalScore} points</p>
+            `)
+            .join('');
+        scoresDisplay.innerHTML = `
+            <h3>All Users</h3>
+            ${users}
+        `;
+    }
+
+    // Reinicia toda la información del localStorage
+    resetLocalStorage() {
+        localStorage.clear(); // Elimina todos los datos del localStorage
+        this.scores = {}; // Reinicia el objeto de puntajes
+        this.currentUser = 'Guest'; // Restablece el usuario actual
+        this.winCount = 0; // Reinicia el contador de victorias
+        this.updateCurrentUserDisplay(); // Actualiza la visualización del usuario
+        this.updateWinCount(); // Actualiza el contador de victorias
+        document.getElementById('scoresDisplay').innerHTML = ''; // Limpia la visualización de puntajes
+        alert('All data has been reset!'); // Muestra un mensaje de confirmación
     }
 }
 

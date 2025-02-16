@@ -8,16 +8,26 @@
     </head>
     <body>
         <!-- Menú Principal -->
-    <div id="menu" class="menu">
-        <h1>Simon Says Game</h1>
-        <p>Total Wins: <span id="winCount">0</span></p>
-        <button id="playButton" class="boton-start">Play</button>
-    </div>
+        <div id="menu" class="menu">
+            <h1>Simon Says Game</h1>
+            <form id="userForm">
+                <input type="text" id="username" placeholder="Enter your username" required>
+                <button type="submit">Save</button>
+            </form>
+            <p>Welcome, <span id="currentUser">Guest</span>!</p>
+            <p>Total Wins: <span id="winCount">0</span></p>
+            <button id="playButton" class="boton-start">Play</button>
+            <button id="viewScoresButton">View My Scores</button>
+            <button id="viewAllUsersButton">View All Users</button>
+            <button id="resetDataButton">Reset Data</button> <!-- Botón para reiniciar el localStorage -->
+            <div id="scoresDisplay"></div>
+        </div>
+
         <!-- Juego -->
         <div class="header">
             <h1>Start playing simon says!</h1>
         </div>
-        <div class="desktop">
+        <div class="desktop hidden">
             <button id="menuButton" class="boton-start">Main Menu</button>
             <div class="simon-bg">
                 <div class="botones-sup">
